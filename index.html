@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribution & Handoff Guide | Lingo Chaps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --sidebar-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --section-bg: #f8fafc;
+            --rule-bg: #fef2f2;
+            --rule-text: #991b1b;
+            --example-bg: #1e293b;
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --text-dark: #f1f5f9;
+            --text-light: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --card-bg: #1e293b;
+            --sidebar-bg: #111827;
+            --section-bg: #1e293b;
+            --rule-bg: rgba(239, 68, 68, 0.1);
+            --rule-text: #fca5a5;
+            --secondary-bg: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg);
+            line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        header {
+            height: 64px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 1000;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: 0.2s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .layout-container {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        aside {
+            width: 300px;
+            border-right: 1px solid var(--border);
+            background: var(--sidebar-bg);
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 64px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+        }
+
+        .toc-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+        }
+
+        .collapsible-parent {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: var(--text-dark);
+            font-weight: 700;
+            transition: 0.3s;
+            margin-bottom: 5px;
+        }
+
+        .collapsible-parent:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .chevron {
+            transition: 0.3s transform;
+            color: var(--text-light);
+        }
+
+        .expanded .chevron {
+            transform: rotate(180deg);
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            padding-left: 20px;
+        }
+
+        .expanded+.submenu {
+            max-height: 800px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+            transition: 0.2s;
+        }
+
+        .nav-item a:hover {
+            color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        .nav-item a.active {
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        main {
+            flex: 1;
+            padding: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+
+        .screen {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .screen.active {
+            display: block !important;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .briefing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
+
+        /* IMAGE ZOOM MODAL STYLES */
+        .zoom-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.9);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .zoom-modal.show {
+            opacity: 1;
+        }
+
+        .zoom-modal-content {
+            max-width: 85%;
+            max-height: 80%;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: transform 0.25s ease;
+        }
+
+        .zoom-modal.show .zoom-modal-content {
+            transform: scale(1);
+        }
+
+        .zoom-modal-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #f1f5f9;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .zoom-modal-close:hover {
+            color: var(--danger);
+        }
+
+        .zoom-modal-caption {
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 1rem;
+            max-width: 600px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        footer {
+            margin-top: 8rem;
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <i class="fas fa-share-alt"></i>
+            <span>Lingo Chaps Distribution Guide</span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
+    </header>
+
+    <div class="layout-container">
+        <aside>
+            <p class="toc-title">Distribution & Handoff</p>
+            <div class="collapsible-parent expanded" id="dist-trigger">
+                <span><i class="fas fa-share-nodes"></i> Operational Flow</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="submenu">
+                <ul style="list-style: none;">
+                    <li class="nav-item"><a href="#distribution" class="active"><i class="fas fa-share-alt" style="width: 16px; text-align: center;"></i> 1. Distribution & Strategy</a></li>
+                    <li class="nav-item"><a href="#handoff"><i class="fas fa-file-export" style="width: 16px; text-align: center;"></i> 2. Assignment & Handoff</a></li>
+                    <li class="nav-item"><a href="#delivery"><i class="fas fa-paper-plane" style="width: 16px; text-align: center;"></i> 3. Delivery Protocol</a></li>
+                    <li class="nav-item"><a href="#workflow"><i class="fas fa-project-diagram" style="width: 16px; text-align: center;"></i> 4. Operations Workflow</a></li>
+                </ul>
+            </div>
+
+            <p class="toc-title" style="margin-top: 2rem;">Tools</p>
+            <div class="collapsible-parent expanded" id="phrase-trigger">
+                <span><i class="fas fa-tools"></i> Production Tools</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="submenu">
+                <ul style="list-style: none;">
+                    <li class="nav-item"><a href="#phrase-tool"><i class="fas fa-keyboard" style="width: 16px; text-align: center;"></i> Phrase TMS Guide</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main>
+            <!-- MAIN SCREEN -->
+            <div id="screen-onboarding" class="screen active">
+                <!-- 1. DISTRIBUTION & STRATEGY -->
+                <section id="distribution">
+                    <h2>1. Distribution & Strategy</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2.5rem; line-height: 1.6;">
+                        Our core routing system matches client projects with resource capabilities to optimize timeline, accuracy, and translation cost.
+                    </p>
+
+                    <!-- STEP 1: CATEGORY CHECK -->
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+                        <span style="background: #4f46e5; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800;">STEP 1</span>
+                        <h4 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-light); margin:0; font-weight:800;">Based on Category</h4>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom: 3rem;">
+                        <!-- Group A -->
+                        <div style="background:#f5f3ff; border:1px solid #ddd6fe; border-radius:16px; padding:1.5rem;">
+                            <p style="font-size:0.85rem; color:#6366f1; font-weight:900; text-transform:uppercase; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+                                <i class="fas fa-file-invoice"></i> Group A: Specialized
+                            </p>
+                            <p style="font-size:0.75rem; color:#64748b; margin-bottom:15px; font-weight: 600;">
+                                (Legal, Medical, Automotive, Technical)</p>
+                            <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.6; color:#1e293b;">
+                                <li style="margin-bottom:8px; display:flex; gap:8px;"><i class="fas fa-times" style="color:#ef4444; margin-top:4px;"></i> <b>No assumptions</b></li>
+                                <li style="margin-bottom:8px; display:flex; gap:8px;"><i class="fas fa-check" style="color:#10b981; margin-top:4px;"></i> <span style="font-weight: 700; color: #065f46;">Terminology must match project requirements</span></li>
+                                <li style="display:flex; gap:8px;"><i class="fas fa-check" style="color:#10b981; margin-top:4px;"></i> <span style="font-weight: 700; color: #065f46;">Paraphrasing is allowed, but the meaning and terminology must remain unchanged.</span></li>
+                            </ul>
+                        </div>
+                        <!-- Group B -->
+                        <div style="background:#f0fdf4; border:1px solid #dcfce7; border-radius:16px; padding:1.5rem;">
+                            <p style="font-size:0.85rem; color:#10b981; font-weight:900; text-transform:uppercase; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+                                <i class="fas fa-file-alt"></i> Group B: General/Misc
+                            </p>
+                            <p style="font-size:0.75rem; color:#64748b; margin-bottom:15px; font-weight: 600;">
+                                (General, ID/Bank Docs, Certificates)</p>
+                            <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; line-height:1.6; color:#1e293b;">
+                                <li style="margin-bottom:8px; display:flex; gap:8px;"><i class="fas fa-briefcase" style="color:#92400e; margin-top:4px;"></i> <span style="font-weight: 700; color: #92400e;">Intake: Email or Physical Docs</span></li>
+                                <li style="margin-bottom:8px; display:flex; gap:8px;"><i class="fas fa-exclamation-circle" style="color:#ef4444; margin-top:4px;"></i> <span style="font-weight: 700; color: #991b1b;">Zero tolerance for data omissions</span></li>
+                                <li style="display:flex; gap:8px;"><i class="fas fa-share-square" style="color:#10b981; margin-top:4px;"></i> <span style="font-weight: 700; color: #065f46;">Share draft with client before final handover</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: TECHNICAL PREPARATION (OCR GATE) -->
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+                        <span style="background: #f59e0b; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800;">STEP 2</span>
+                        <h4 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-light); margin:0; font-weight:800;">Technical Preparation & OCR Gate</h4>
+                    </div>
+
+                    <div class="briefing-card" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fcd34d; margin-bottom: 3rem; border-radius: 24px; padding: 2rem;">
+                        <div style="display: flex; align-items: flex-start; gap: 20px;">
+                            <div style="background: #f59e0b; color: white; width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; box-shadow: 0 8px 15px -3px rgba(245, 158, 11, 0.3);">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div style="flex-grow: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <h5 style="margin: 0; font-size: 1rem; font-weight: 900; color: #92400e; text-transform: uppercase;">File Conversion Protocol</h5>
+                                    <span style="background: rgba(146, 64, 14, 0.1); color: #92400e; padding: 4px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; border: 1px solid rgba(146, 64, 14, 0.2);">SENIOR ACTION REQUIRED</span>
+                                </div>
+                                <p style="font-size: 0.9rem; color: #92400e; margin-bottom: 20px; font-weight: 600; line-height: 1.5;">
+                                    Determine if the file can be sent directly to the translator or requires technical extraction to ensure editability. The path forward is determined by your senior's judgment. Examples: InDesign layouts, CAD files, high-resolution scans, or complex deadlines.
+                                </p>
+
+                                <div style="background: rgba(79, 70, 229, 0.05); border: 1px solid rgba(79, 70, 229, 0.2); border-radius: 20px; padding: 1.5rem;">
+                                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                        <div style="background: #4f46e5; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+                                            <i class="fas fa-users-cog"></i>
+                                        </div>
+                                        <h6 style="margin: 0; font-size: 0.85rem; font-weight: 800; color: #1e293b; text-transform: uppercase; letter-spacing: 1px;">Simultaneous Resource Alignment</h6>
+                                    </div>
+                                    <p style="margin: 0; font-size: 0.9rem; color: #1e293b; font-weight: 600; line-height: 1.5;">
+                                        Simultaneously align resources based on category (Group A: Core Team / Group B: Specialized Pool).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. ASSIGNMENT & HANDOFF -->
+                <section id="handoff">
+                    <h2>2. Assignment & Handoff</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2.5rem; line-height: 1.6;">
+                        A detailed mapping of client tasks to specific workflows, depending on resource availability and system setups.
+                    </p>
+
+                    <!-- STEP 3: PATH SELECTION -->
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+                        <span style="background: #4f46e5; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800;">STEP 3</span>
+                        <h4 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-light); margin:0; font-weight:800;">Select Project Path</h4>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+                        <!-- Phrase TMS Path -->
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 1.5rem; position: relative;">
+                            <h5 style="color: #4f46e5; font-size: 1rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-terminal"></i> Phrase TMS Path
+                            </h5>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #475569; line-height: 1.6;">
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #4f46e5; margin-right: 5px;"></i> <b>Large/Complex:</b> Best for high-volume localization.</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #4f46e5; margin-right: 5px;"></i> <b>Tool-Based:</b> Work is done within Phrase TMS.</li>
+                                <li><i class="fas fa-check-circle" style="color: #4f46e5; margin-right: 5px;"></i> <b>Automated QA:</b> Tag handling & term consistency.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Direct Human Path -->
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 1.5rem; position: relative;">
+                            <h5 style="color: #10b981; font-size: 1rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-file-alt"></i> Direct Human Path
+                            </h5>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #475569; line-height: 1.6;">
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #10b981; margin-right: 5px;"></i> <b>Standard:</b> Best for simple or one-off tasks.</li>
+                                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: #10b981; margin-right: 5px;"></i> <b>Manual:</b> Done in Word, Excel, or PDF directly.</li>
+                                <li><i class="fas fa-check-circle" style="color: #10b981; margin-right: 5px;"></i> <b>Offline:</b> Easy to manage without tool setup.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: EXECUTION GOAL -->
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+                        <span style="background: #10b981; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800;">STEP 4</span>
+                        <h4 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-light); margin:0; font-weight:800;">Execution Goal</h4>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 24px; padding: 1.5rem; margin-bottom: 2rem; border-left: 5px solid var(--secondary);">
+                        <p style="margin: 0; font-size: 1rem; color: #475569; line-height: 1.6; font-weight: 600;">
+                            <i class="fas fa-project-diagram" style="color: var(--secondary); margin-right: 10px;"></i>
+                            <b>FLOW LOGIC:</b> Once the project path is finalized in the Discovery phase, the focus shifts to resource allocation. Match the document domain to the right translator and immediately proceed with the handoff of all required project assets.
+                        </p>
+                    </div>
+
+                    <div class="briefing-card" style="padding: 0; overflow: hidden; border: 1px solid #e2e8f0; border-top: 4px solid var(--secondary);">
+                        <!-- Stage 1 -->
+                        <div style="padding: 2.5rem; border-bottom: 1px solid #f1f5f9; background: #fcfdfd;">
+                            <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 1rem;"><i class="fas fa-user-check" style="color:#10b981; margin-right:10px;"></i> Stage 1: Translation Selection Strategy</h3>
+                            <p style="font-size: 1rem; color: #475569; border-left: 4px solid #10b981; padding-left: 1.5rem; font-style: italic; line-height: 1.6;">
+                                "Assign the right translator, not just any available one. Match expertise to the domain to ensure baseline quality."
+                            </p>
+                        </div>
+
+                        <!-- Stage 2 -->
+                        <div style="padding: 2.5rem; border-bottom: 1px solid #f1f5f9; background: white;">
+                            <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 1rem;"><i class="fas fa-file-archive" style="color:#3b82f6; margin-right:10px;"></i> Stage 2: Preparation & Handoff</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div style="display: flex; gap: 15px; padding: 1.2rem; background: #f8fafc; border-radius: 16px;">
+                                    <i class="fas fa-file-pdf" style="color: #3b82f6; font-size: 1.2rem;"></i>
+                                    <div>
+                                        <h5 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 4px;">Source Files</h5>
+                                        <p style="font-size: 0.8rem; color: #64748b; margin: 0;">Reference files & clear output specs.</p>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 15px; padding: 1.2rem; background: #f8fafc; border-radius: 16px;">
+                                    <i class="fas fa-list-ol" style="color: #3b82f6; font-size: 1.2rem;"></i>
+                                    <div>
+                                        <h5 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 4px;">Instructions</h5>
+                                        <p style="font-size: 0.8rem; color: #64748b; margin: 0;">Explicit project guidelines & pairs.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stage 3 -->
+                        <div style="padding: 2.5rem; background: #1e293b; color: white;">
+                            <h3 style="font-size: 1.25rem; font-weight: 800; color: white; margin-bottom: 1.5rem;"><i class="fas fa-paper-plane" style="color:#fbbf24; margin-right:10px;"></i> Stage 3: Communication Toolkit</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                                <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                                    <p style="font-size: 0.7rem; color: #94a3b8; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">New Resource</p>
+                                    <p style="font-family: 'Courier New', monospace; font-size: 0.85rem; color: #e2e8f0;">"Hi, Good morning! Are you available for Japanese to English language translation work?"</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                                    <p style="font-size: 0.7rem; color: #94a3b8; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Previous Resource</p>
+                                    <p style="font-family: 'Courier New', monospace; font-size: 0.85rem; color: #e2e8f0;">"Hi, Hope you are doing well! We have Task available Japanese to English translation (word count), deadline X. Please provide availability."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. DELIVERY PROTOCOL -->
+                <section id="delivery">
+                    <h2>3. Delivery Protocol</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2.5rem; line-height: 1.6;">
+                        Before dispatching completed projects, verify and gather all output assets in the proper channels.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 20px; padding: 2rem;">
+                            <h4 style="font-weight: 800; margin-bottom: 1rem; color: var(--text-dark);"><i class="fas fa-file-zipper" style="color:var(--primary); margin-right:8px;"></i> Package Checklist</h4>
+                            <ul style="list-style: none; font-size: 0.85rem; line-height: 1.8; color: var(--text-light); padding: 0;">
+                                <li><i class="fas fa-check" style="color:#10b981; margin-right:8px;"></i> Final translated document in editable format</li>
+                                <li><i class="fas fa-check" style="color:#10b981; margin-right:8px;"></i> Exported PDF matching source layout</li>
+                                <li><i class="fas fa-check" style="color:#10b981; margin-right:8px;"></i> Client-specific glossary updates if required</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 20px; padding: 2rem;">
+                            <h4 style="font-weight: 800; margin-bottom: 1rem; color: var(--text-dark);"><i class="fas fa-paper-plane" style="color:var(--primary); margin-right:8px;"></i> Channels & Logging</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-light); line-height: 1.6;">
+                                Send files via WhatsApp thread or official Email. Update the task status to <b>Delivered</b> on Zoho Books immediately.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. OPERATIONS WORKFLOW -->
+                <section id="workflow">
+                    <h2>4. Operations Workflow</h2>
+                    <div style="margin-bottom: 3rem; text-align: center;">
+                        <p style="color: var(--text-light); font-size: 1.1rem;">The standardized cross-platform operational pipeline.</p>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 3rem; position: relative;">
+                        <!-- Stage 1 -->
+                        <div style="display: grid; grid-template-columns: 1fr 120px 1fr; align-items: center; z-index: 1;">
+                            <div class="briefing-card" style="margin: 0; text-align: right; border-right: 4px solid var(--primary); padding: 1.5rem;">
+                                <h4 style="color: var(--primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 900; margin-bottom: 0.5rem;">1. Client Side</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-dark);">Project intake originates from <b>WhatsApp</b> or <b>Email</b>. Communications are logged immediately.</p>
+                            </div>
+                            <div style="display: flex; justify-content: center;">
+                                <div class="icon-box" style="width: 50px; height: 50px; background: var(--primary); color: white;"><i class="fas fa-comments"></i></div>
+                            </div>
+                            <div style="padding-left: 2rem;">
+                                <span style="font-weight: 700; font-size: 0.85rem;">INTAKE CHANNEL</span>
+                                <p style="font-size: 0.8rem; color: var(--text-light);">Zero delay response policy active.</p>
+                            </div>
+                        </div>
+
+                        <!-- Stage 2 -->
+                        <div style="display: grid; grid-template-columns: 1fr 120px 1fr; align-items: center; z-index: 1;">
+                            <div style="text-align: right; padding-right: 2rem;">
+                                <span style="font-weight: 700; font-size: 0.85rem;">FOLDER STRUCTURE</span>
+                                <p style="font-size: 0.8rem; color: var(--text-light);">Create folders manually under the standard hierarchy.</p>
+                            </div>
+                            <div style="display: flex; justify-content: center;">
+                                <div class="icon-box" style="width: 50px; height: 50px; background: var(--secondary); color: white;"><i class="fas fa-folder-open"></i></div>
+                            </div>
+                            <div class="briefing-card" style="margin: 0; text-align: left; border-left: 4px solid var(--secondary); padding: 1.5rem;">
+                                <h4 style="color: var(--secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 900; margin-bottom: 0.5rem;">2. Project Setup</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-dark);">Tasks are logged in <b>Zoho Books</b> and local files are structured correctly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- PHRASE TMS SCREEN -->
+            <div id="screen-phrase" class="screen">
+                <section id="phrase-tool">
+                    <div style="text-align: center; padding: 4rem 0; margin-bottom: 2rem;">
+                        <img src="https://phrase.com/wp-content/uploads/2022/11/Logo_primary.svg" alt="Phrase Logo"
+                            style="height: 50px; margin-bottom: 1.5rem;">
+                        <h1 style="font-size: 3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem;">
+                            Phrase TMS Guide</h1>
+                        <p style="color: var(--text-light); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+                            Master the core tool of our localization ecosystem.
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                        <!-- PILLAR 1: THE LINGUISTIC ENGINE -->
+                        <div class="briefing-card" style="margin: 0; padding: 2.5rem; border-top: 4px solid var(--primary);">
+                            <div class="icon-box" style="background: rgba(37, 99, 235, 0.1); color: var(--primary); margin-bottom: 1.5rem;">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">The Linguistic Engine</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-light); line-height: 1.7;">
+                                Phrase TMS is our central processing hub. It synchronizes <b>Source Files</b> with our Translation Memories (TMs) and Term Bases (TBs) in real-time.
+                            </p>
+                        </div>
+
+                        <!-- PILLAR 2: AUTOMATED QA LOOP -->
+                        <div class="briefing-card" style="margin: 0; padding: 2.5rem; border-top: 4px solid #10b981;">
+                            <div class="icon-box" style="background: rgba(16, 185, 129, 0.1); color: #10b981; margin-bottom: 1.5rem;">
+                                <i class="fas fa-shield-check"></i>
+                            </div>
+                            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">The Quality Loop</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-light); line-height: 1.7;">
+                                Every segment undergoes an automated QA check. Our protocol demands a 100% resolution of all warnings before delivery.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // SPA SCREEN SWITCHER
+        function showScreen(screenId) {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(s => {
+                if (s.id === `screen-${screenId}`) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // NAV LINK HANDLER
+        document.querySelectorAll('.nav-item a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                document.querySelectorAll('.nav-item a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                if (href === '#phrase-tool') {
+                    showScreen('phrase');
+                } else {
+                    showScreen('onboarding');
+                    const target = document.querySelector(href);
+                    if (target) {
+                        setTimeout(() => {
+                            window.scrollTo({
+                                top: target.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }, 50);
+                    }
+                }
+            });
+        });
+
+        // Theme Toggle
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeBtn.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+    </script>
+</body>
+</html>
