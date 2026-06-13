@@ -666,6 +666,7 @@
         // NAV LINK HANDLER
         document.querySelectorAll('.nav-item a').forEach(link => {
             link.addEventListener('click', (e) => {
+                e.preventDefault();
                 const href = link.getAttribute('href');
                 document.querySelectorAll('.nav-item a').forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
@@ -684,6 +685,14 @@
                         }, 50);
                     }
                 }
+                history.pushState(null, null, href);
+            });
+        });
+
+        // Collapsible Sidebar Menu Toggle
+        document.querySelectorAll('.collapsible-parent').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                trigger.classList.toggle('expanded');
             });
         });
 
