@@ -428,19 +428,11 @@
                     <li class="nav-item"><a href="#handoff"><i class="fas fa-file-export" style="width: 16px; text-align: center;"></i> 2. Assignment & Handoff</a></li>
                     <li class="nav-item"><a href="#delivery"><i class="fas fa-paper-plane" style="width: 16px; text-align: center;"></i> 3. Delivery Protocol</a></li>
                     <li class="nav-item"><a href="#workflow"><i class="fas fa-project-diagram" style="width: 16px; text-align: center;"></i> 4. Operations Workflow</a></li>
+
                 </ul>
             </div>
 
-            <p class="toc-title" style="margin-top: 2rem;">Tools</p>
-            <div class="collapsible-parent expanded" id="phrase-trigger">
-                <span><i class="fas fa-tools"></i> Production Tools</span>
-                <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="submenu">
-                <ul style="list-style: none;">
-                    <li class="nav-item"><a href="#phrase-tool"><i class="fas fa-keyboard" style="width: 16px; text-align: center;"></i> Phrase TMS Guide</a></li>
-                </ul>
-            </div>
+
         </aside>
 
         <main>
@@ -508,6 +500,38 @@
                                     Determine if the file can be sent directly to the translator or requires technical extraction to ensure editability. The path forward is determined by your senior's judgment. Examples: InDesign layouts, CAD files, high-resolution scans, or complex deadlines.
                                 </p>
 
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                                    <!-- OCR Conversion -->
+                                    <div style="background: white; border: 1px solid var(--border); border-radius: 20px; padding: 1.5rem;">
+                                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                            <i class="fas fa-file-pdf" style="color: #ef4444; font-size: 1.2rem;"></i>
+                                            <h6 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: #1e293b;">OCR Conversion</h6>
+                                        </div>
+                                        <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 12px; line-height: 1.5;">
+                                            Use high-fidelity tools for non-editable files (PDF/JPG).
+                                        </p>
+                                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                            <span style="background: #fdf2f2; color: #ef4444; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; border: 1px solid rgba(239, 68, 68, 0.1);">ABBYY FineReader</span>
+                                            <span style="background: #fdf2f2; color: #ef4444; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; border: 1px solid rgba(239, 68, 68, 0.1);">Online OCR Tool</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Final Requirement -->
+                                    <div style="background: white; border: 1px solid var(--border); border-left: 4px solid var(--secondary); border-radius: 20px; padding: 1.5rem;">
+                                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                            <i class="fas fa-file-word" style="color: #3b82f6; font-size: 1.2rem;"></i>
+                                            <h6 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: #1e293b;">Final Requirement</h6>
+                                        </div>
+                                        <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 12px; line-height: 1.5;">
+                                            All files must be provided to the translator in a clean, editable format.
+                                        </p>
+                                        <div style="display: flex; align-items: center; gap: 6px; color: var(--secondary); font-weight: 800; font-size: 0.85rem;">
+                                            <i class="fas fa-check" style="color: var(--secondary);"></i>
+                                            <span style="color: var(--secondary);">Output: Word.doc</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div style="background: rgba(79, 70, 229, 0.05); border: 1px solid rgba(79, 70, 229, 0.2); border-radius: 20px; padding: 1.5rem;">
                                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                                         <div style="background: #4f46e5; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
@@ -530,6 +554,73 @@
                     <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2.5rem; line-height: 1.6;">
                         A detailed mapping of client tasks to specific workflows, depending on resource availability and system setups.
                     </p>
+
+                    <!-- Immediate Action Protocol (Rapid Response) -->
+                    <div class="briefing-card" style="background: var(--section-bg); padding: 2rem; margin-top: 1.5rem; margin-bottom: 2.5rem;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
+                            <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                            <div>
+                                <span class="goal-badge">Rapid Response</span>
+                                <h3 style="font-size: 1.4rem; margin-top: 4px; color: var(--text-dark);">Immediate Action Protocol</h3>
+                            </div>
+                        </div>
+                        <p
+                            style="font-size: 1.05rem; color: var(--text-dark); font-weight: 500; border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-bottom: 2rem;">
+                            "Distribute the task immediately while simultaneously securing data on Drive D."
+                        </p>
+
+                        <div
+                            style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2rem;">
+                            <div class="animated-card"
+                                style="margin: 0; padding: 1rem; background: #f0f9ff; border-left: 4px solid #3b82f6; text-align: center; border-radius: 8px;">
+                                <i class="fas fa-file-contract" style="color: #3b82f6;"></i>
+                                <b style="display: block; font-size: 0.75rem; margin-top: 5px; color: #1e40af;">Brief Analysis</b>
+                            </div>
+                            <div class="animated-card"
+                                style="margin: 0; padding: 1rem; background: #fdf2f8; border-left: 4px solid #ec4899; text-align: center; border-radius: 8px;">
+                                <i class="fas fa-sticky-note" style="color: #ec4899;"></i>
+                                <b style="display: block; font-size: 0.75rem; margin-top: 5px; color: #991b1b;">Deadline Notes</b>
+                            </div>
+                            <div class="animated-card"
+                                style="margin: 0; padding: 1rem; background: #ecfdf5; border-left: 4px solid #10b981; text-align: center; border-radius: 8px;">
+                                <i class="fas fa-hdd" style="color: #10b981;"></i>
+                                <b style="display: block; font-size: 0.75rem; margin-top: 5px; color: #166534;">Securely save</b>
+                            </div>
+                            <div class="animated-card"
+                                style="margin: 0; padding: 1rem; background: #fffbeb; border-left: 4px solid #f59e0b; text-align: center; border-radius: 8px;">
+                                <i class="fas fa-broadcast-tower" style="color: #f59e0b;"></i>
+                                <b style="display: block; font-size: 0.75rem; margin-top: 5px; color: #92400e;">Resource Outreach</b>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background: var(--card-bg); border-radius: 12px; padding: 1.2rem; border: 1px solid var(--border);">
+                            <h4
+                                style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-dark); margin-bottom: 1rem; font-weight: 800; text-align: center;">
+                                Triple-Path Escalation Strategy
+                            </h4>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                                <div
+                                    style="text-align: center; padding: 10px; background: var(--sidebar-bg); border-radius: 10px; border: 1px solid var(--border);">
+                                    <i class="fas fa-user-check"
+                                        style="color: #0369a1; font-size: 0.8rem; margin-bottom: 5px;"></i>
+                                    <b style="font-size: 0.7rem; display: block; color: var(--text-dark);">Direct Contact</b>
+                                </div>
+                                <div
+                                    style="text-align: center; padding: 10px; background: var(--sidebar-bg); border-radius: 10px; border: 1px solid var(--border);">
+                                    <i class="fas fa-briefcase"
+                                        style="color: #92400e; font-size: 0.8rem; margin-bottom: 5px;"></i>
+                                    <b style="font-size: 0.7rem; display: block; color: var(--text-dark);">Upwork Post</b>
+                                </div>
+                                <div
+                                    style="text-align: center; padding: 10px; background: var(--sidebar-bg); border-radius: 10px; border: 1px solid var(--border);">
+                                    <i class="fas fa-phone-alt"
+                                        style="color: #166534; font-size: 0.8rem; margin-bottom: 5px;"></i>
+                                    <b style="font-size: 0.7rem; display: block; color: var(--text-dark);">Offline Sync</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- STEP 3: PATH SELECTION -->
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
@@ -722,44 +813,7 @@
                 </section>
             </div>
 
-            <!-- PHRASE TMS SCREEN -->
-            <div id="screen-phrase" class="screen">
-                <section id="phrase-tool">
-                    <div style="text-align: center; padding: 4rem 0; margin-bottom: 2rem;">
-                        <img src="https://phrase.com/wp-content/uploads/2022/11/Logo_primary.svg" alt="Phrase Logo"
-                            style="height: 50px; margin-bottom: 1.5rem;">
-                        <h1 style="font-size: 3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem;">
-                            Phrase TMS Guide</h1>
-                        <p style="color: var(--text-light); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
-                            Master the core tool of our localization ecosystem.
-                        </p>
-                    </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 2rem;">
-                        <!-- PILLAR 1: THE LINGUISTIC ENGINE -->
-                        <div class="briefing-card" style="margin: 0; padding: 2.5rem; border-top: 4px solid var(--primary);">
-                            <div class="icon-box" style="background: rgba(37, 99, 235, 0.1); color: var(--primary); margin-bottom: 1.5rem;">
-                                <i class="fas fa-microchip"></i>
-                            </div>
-                            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">The Linguistic Engine</h3>
-                            <p style="font-size: 0.95rem; color: var(--text-light); line-height: 1.7;">
-                                Phrase TMS is our central processing hub. It synchronizes <b>Source Files</b> with our Translation Memories (TMs) and Term Bases (TBs) in real-time.
-                            </p>
-                        </div>
-
-                        <!-- PILLAR 2: AUTOMATED QA LOOP -->
-                        <div class="briefing-card" style="margin: 0; padding: 2.5rem; border-top: 4px solid #10b981;">
-                            <div class="icon-box" style="background: rgba(16, 185, 129, 0.1); color: #10b981; margin-bottom: 1.5rem;">
-                                <i class="fas fa-shield-check"></i>
-                            </div>
-                            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">The Quality Loop</h3>
-                            <p style="font-size: 0.95rem; color: var(--text-light); line-height: 1.7;">
-                                Every segment undergoes an automated QA check. Our protocol demands a 100% resolution of all warnings before delivery.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-            </div>
         </main>
     </div>
 
@@ -774,7 +828,6 @@
                     s.classList.remove('active');
                 }
             });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // NAV LINK HANDLER
@@ -785,21 +838,35 @@
                 document.querySelectorAll('.nav-item a').forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
 
-                if (href === '#phrase-tool') {
-                    showScreen('phrase');
-                } else {
-                    showScreen('onboarding');
-                    const target = document.querySelector(href);
-                    if (target) {
-                        setTimeout(() => {
-                            window.scrollTo({
-                                top: target.offsetTop - 100,
-                                behavior: 'smooth'
-                            });
-                        }, 50);
-                    }
+                showScreen('onboarding');
+                const target = document.querySelector(href);
+                if (target) {
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
                 }
                 history.pushState(null, null, href);
+            });
+        });
+
+        // Scroll Spy for Sidebar Links
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const scrollPos = window.scrollY || document.documentElement.scrollTop;
+
+            sections.forEach(section => {
+                if (section.offsetTop - 120 <= scrollPos && (section.offsetTop + section.offsetHeight - 120) > scrollPos) {
+                    const id = section.getAttribute('id');
+                    document.querySelectorAll('.nav-item a').forEach(link => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
             });
         });
 
